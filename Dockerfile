@@ -3,8 +3,14 @@ LABEL version="1.1" maintainer="Kayla Altepeter"
 
 COPY --from=jfrog-docker-reg2.bintray.io/jfrog/jfrog-cli-go:1.32.3 /usr/local/bin/jfrog /usr/local/bin/jfrog
 
-COPY --from=node:12.14.0-buster-slim /usr/local/bin/node /usr/local/bin/node
-COPY --from=node:12.14.0-buster-slim /usr/local/bin/npm /usr/local/bin/npm
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+    && apt-get update && apt-get install -y --no-install-recommends \
+    vim \
+    python3 \
+    jq \
+    unzip \
+    curl \
+    nodejs
 
 # install dumb-init
 # https://engineeringblog.yelp.com/2016/01/dumb-init-an-init-for-docker.html
