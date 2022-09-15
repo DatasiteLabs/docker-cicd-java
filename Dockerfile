@@ -1,7 +1,7 @@
 FROM gradle:6.2.1-jdk11
 LABEL version="1.1" maintainer="Kayla Altepeter"
 
-COPY --from=jfrog-docker-reg2.bintray.io/jfrog/jfrog-cli-go:1.32.3 /usr/local/bin/jfrog /usr/local/bin/jfrog
+COPY --from=releases-docker.jfrog.io/jfrog/jfrog-cli:1.53.2 /usr/local/bin/jfrog /usr/local/bin/jfrog
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     && apt-get update && apt-get install -y --no-install-recommends \
