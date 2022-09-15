@@ -3,7 +3,7 @@ LABEL version="1.1" maintainer="Kayla Altepeter"
 
 COPY --from=releases-docker.jfrog.io/jfrog/jfrog-cli:1.53.2 /usr/local/bin/jfrog /usr/local/bin/jfrog
 
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get update && apt-get install -y --no-install-recommends \
     vim \
     python3 \

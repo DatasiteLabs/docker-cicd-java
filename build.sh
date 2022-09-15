@@ -5,6 +5,8 @@ set -o nounset
 [[ ${DEBUG:-} == true ]] && set -o xtrace
 readonly __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-docker_version=$(cat VERSION)
+LOCAL_NAME=datasite/test-cicd-java
+echo "Building ${LOCAL_NAME}"
 
-docker build --no-cache --pull -t docker-cicd-java:"${docker_version}" -t docker-cicd-java:latest "${__dir}"
+docker build --no-cache --pull -t "${LOCAL_NAME}:latest" "${__dir}/"
+docker build -t test-cicd-java-consumer "${__dir}/test"
