@@ -15,7 +15,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: datasite/docker-cicd-node
+  IMAGE_NAME: datasite/docker-cicd-java
   TEST_TAG: datasite/test-cicd-java:latest
 
 jobs:
@@ -76,21 +76,10 @@ jobs:
 
       - name: Test
         id: test
-        # I would rather run rootless or as 'node' user like jenkins does, that is problematic here
+        # I would rather run rootless or as 'gradle' user like jenkins does, that is problematic here
         run: |
-          docker build -t "test-cicd-node-consumer" "$(realpath .)/test"
-          docker run --rm --user node test-cicd-node-consumer
-      # - name: Test
-      #   id: test
-      #   uses: addnab/docker-run-action@v3
-      #   with:
-      #     image: ${{ env.TEST_TAG }}
-      #     options: --rm -v ${{ github.workspace }}/test:/home/node/test:rw -w /home/node/test --user 1001
-      #     run: |
-      #       ls -la
-      #       whoami
-      #       npm ci
-      #       npm run test
+          docker build -t "test-cicd-java-consumer" "$(realpath .)/test"
+          docker run --rm --user gradle test-cicd-java-consumer
           
       - name: Push
         id: docker-push
